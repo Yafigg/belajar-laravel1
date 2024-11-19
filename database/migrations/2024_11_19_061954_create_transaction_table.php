@@ -14,11 +14,12 @@ return new class extends Migration
     public function up()
     {
         Schema::create('transactions', function (Blueprint $table) {
-            $table->id();
-            $table->integer('id_pelanggan');
-            $table->integer('id_petugas');
-            $table->date('tgl_transaksi');
+            $table->integer("id")->autoIncrement();
+            $table->integer('user_id');
+            $table->date('transaction_date');
             $table->timestamps();
+
+            $table->foreign('user_id')->references('id')->on("users");
         });
     }
 
@@ -29,6 +30,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('transaksi');
+        Schema::dropIfExists('transaction');
     }
 };
